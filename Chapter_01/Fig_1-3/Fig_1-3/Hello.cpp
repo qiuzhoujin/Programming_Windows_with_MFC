@@ -32,6 +32,14 @@ void CMainWindow::OnPaint()
 	CRect rect;
 	GetClientRect(&rect);
 
+	//dc.SetMapMode(MM_ISOTROPIC);
+	dc.SetMapMode(MM_ANISOTROPIC);
+	dc.SetWindowExt(500, 500);
+	dc.SetViewportExt(rect.Width(), rect.Height());
+	dc.Ellipse(0, 0, 500, 500);
+	
+	/*
 	dc.DrawText(TEXT("Hello, MFC"), -1, &rect,
 		DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+	*/
 }
