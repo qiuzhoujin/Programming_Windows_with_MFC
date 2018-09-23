@@ -32,8 +32,9 @@ void CMainWindow::OnPaint()
 	CRect rect;
 	GetClientRect(&rect);
 
-	//dc.SetMapMode(MM_ISOTROPIC);
-	dc.SetMapMode(MM_ANISOTROPIC);
+	dc.SetViewportOrg(rect.Width() / 2, rect.Height() / 2);
+	dc.SetMapMode(MM_ISOTROPIC);
+	//dc.SetMapMode(MM_ANISOTROPIC);
 	dc.SetWindowExt(500, 500);
 	dc.SetViewportExt(rect.Width(), rect.Height());
 	dc.Ellipse(0, 0, 500, 500);
