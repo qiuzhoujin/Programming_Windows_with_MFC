@@ -29,10 +29,11 @@ void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
 	CClientDC cdc(this);
-	int cx = cdc.GetDeviceCaps(HORZRES);
-	int cy = cdc.GetDeviceCaps(VERTRES);
+	int nPlanes = cdc.GetDeviceCaps(PLANES);
+	int nBPP = cdc.GetDeviceCaps(BITSPIXEL);
+	int nColors = 1 << (nPlanes * nBPP);
 	CString str;
-	str.Format(TEXT("cx:%d, cy:%d"), cx, cy);
+	str.Format(TEXT("nPlanes:%d, nBPP:%d, nColors:%d"), nPlanes, nBPP, nColors);
 
 	CRect rect;
 	GetClientRect(&rect);
