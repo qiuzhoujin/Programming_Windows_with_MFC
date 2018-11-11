@@ -43,4 +43,5 @@ void CMainWindow::OnPaint()
 
 	dc.MoveTo(10, 10);
 	dc.LineTo(500, 600);
+	dc.LineTo(600, 600);
 }
