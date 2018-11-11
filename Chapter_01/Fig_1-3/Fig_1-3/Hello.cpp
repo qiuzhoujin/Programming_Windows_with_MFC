@@ -41,6 +41,7 @@ void CMainWindow::OnPaint()
 	dc.DrawText(str, -1, &rect,
 		DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 
-	POINT aPoint[5] = {{0, 0}, {0, 100}, {100, 100}, {100, 0}, {0, 0}};
-	dc.Polyline(aPoint, 5);
+	dc.MoveTo(0, 0);
+	POINT aPoint[4] = {{0, 100}, {100, 100}, {100, 0}, {0, 0}};
+	dc.PolylineTo(aPoint, 4);
 }
