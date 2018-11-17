@@ -1,8 +1,5 @@
 #include <afxwin.h>
 #include "Hello.h"
-#include <math.h>
-#define SEGMENTS 500
-#define PI 3.1415926
 
 CMyApp myApp;
 
@@ -30,18 +27,9 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::OnPaint()
 {
-	CRect rect;
-	GetClientRect(&rect);
-	int nWidth = rect.Width();
-	int nHeight = rect.Height();
-
 	CPaintDC dc(this);
-	CPoint aPoint[SEGMENTS];
-
-	for (int i = 0; i < SEGMENTS; i++)
-	{
-		aPoint[i].x = (i * nWidth) / SEGMENTS;
-		aPoint[i].y = (int)((nHeight / 2) * (1 - (sin((2 * PI * i) / SEGMENTS))));
-	}
-	dc.Polyline(aPoint, SEGMENTS);
+	CRect rect(0, 0, 200, 100);
+	CPoint point1(0, -500);
+	CPoint point2(-500, 0);
+	dc.Arc(rect, point1, point2);
 }
