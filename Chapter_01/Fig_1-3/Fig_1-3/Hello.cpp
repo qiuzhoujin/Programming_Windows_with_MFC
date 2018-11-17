@@ -1,5 +1,8 @@
 #include <afxwin.h>
 #include "Hello.h"
+#include <math.h>
+#define SEGMENTS 500
+#define PI 3.1415926
 
 CMyApp myApp;
 
@@ -27,21 +30,18 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::OnPaint()
 {
-	CPaintDC dc(this);
-	CClientDC cdc(this);
-	int nPlanes = cdc.GetDeviceCaps(PLANES);
-	int nBPP = cdc.GetDeviceCaps(BITSPIXEL);
-	int nColors = 1 << (nPlanes * nBPP);
-	CString str;
-	str.Format(TEXT("nPlanes:%d, nBPP:%d, nColors:%d"), nPlanes, nBPP, nColors);
-
 	CRect rect;
 	GetClientRect(&rect);
+	int nWidth = rect.Width();
+	int nHeight = rect.Height();
 
-	dc.DrawText(str, -1, &rect,
-		DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+	CPaintDC dc(this);
+	CPoint aPoint[SEGMENTS];
 
-	dc.MoveTo(0, 0);
-	POINT aPoint[4] = {{0, 100}, {100, 100}, {100, 0}, {0, 0}};
-	dc.PolylineTo(aPoint, 4);
+	for (int i = 0; i < SEGMENTS; i++)
+	{
+		aPoint[i].x = (i * nWidth) / SEGMENTS;
+		aPoint[i].y = (int)((nHeight / 2) * (1 - (sin((2 * PI * i) / SEGMENTS))));
+	}
+	dc.Polyline(aPoint, SEGMENTS);
 }
