@@ -28,8 +28,8 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	CRect rect(0, 0, 200, 100);
-	CPoint point1(0, -500);
-	CPoint point2(-500, 0);
-	dc.Arc(rect, point1, point2);
+	POINT aPoint1[4] = { 120, 100, 120, 200, 250, 150, 500, 40};
+	POINT aPoint2[4] = { 120, 100, 50, 350, 250, 200, 500, 40};
+	dc.PolyBezier(aPoint1, 4);
+	dc.PolyBezier(aPoint2, 4);
 }
