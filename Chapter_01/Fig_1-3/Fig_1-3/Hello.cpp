@@ -28,8 +28,7 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	POINT aPoint1[4] = { 120, 100, 120, 200, 250, 150, 500, 40};
-	POINT aPoint2[4] = { 120, 100, 50, 350, 250, 200, 500, 40};
-	dc.PolyBezier(aPoint1, 4);
-	dc.PolyBezier(aPoint2, 4);
+	CPen pen(PS_SOLID, 10, RGB(255, 0, 0));
+	CPen *pOldPen = dc.SelectObject(&pen);
+	dc.Ellipse(0, 0, 100, 100);
 }
