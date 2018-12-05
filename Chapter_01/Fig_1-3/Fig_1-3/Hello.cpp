@@ -28,7 +28,17 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	CPen pen(PS_SOLID, 10, RGB(255, 0, 0));
-	CPen *pOldPen = dc.SelectObject(&pen);
-	dc.Ellipse(0, 0, 100, 100);
+	LOGBRUSH lb;
+	lb.lbStyle = BS_SOLID;
+	lb.lbColor = RGB(0, 255, 0);
+	CPen pen(PS_GEOMETRIC | PS_SOLID | PS_ENDCAP_FLAT | PS_JOIN_ROUND, 16, &lb);
+
+	dc.SelectObject(&pen);
+	dc.BeginPath();    // Begin the path definition
+	dc.MoveTo(0, 0);   // Create a triangular path
+	dc.LineTo(100, 200);
+	dc.LineTo(200, 100);
+	dc.CloseFigure();
+	dc.EndPath();      // End the path definition
+	dc.StrokePath();   // Draw the triangle
 }
