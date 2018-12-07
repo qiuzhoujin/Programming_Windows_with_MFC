@@ -28,9 +28,11 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
+	RECT rect;
 
-	CBrush brush(HS_DIAGCROSS, RGB(0, 0, 0));
-	dc.SelectObject(&brush);
-	dc.SetBkMode(TRANSPARENT);
-	dc.Rectangle(0, 0, 100, 100);
+	dc.SetBkMode(TRANSPARENT); // 如果背景模式为透明，则背景色将不再起作用。
+	dc.SetBkColor(RGB(255, 0, 0));
+	GetClientRect(&rect);
+
+	dc.DrawText(TEXT("LAME"), &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 }
