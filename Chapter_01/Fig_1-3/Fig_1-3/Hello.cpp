@@ -29,8 +29,8 @@ void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
 
-	CBrush brush(HS_DIAGCROSS, RGB(255, 255, 255));
+	CBrush brush(HS_DIAGCROSS, RGB(0, 0, 0));
 	dc.SelectObject(&brush);
-	dc.SetBkColor(RGB(192, 192, 192));
+	dc.SetBkMode(TRANSPARENT);
 	dc.Rectangle(0, 0, 100, 100);
 }
