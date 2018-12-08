@@ -32,6 +32,12 @@ void CMainWindow::OnPaint()
 	static int x2 = x1 + 150, y2 = y1 + 100;
 
 	CBrush brush(HS_DIAGCROSS, RGB(255, 255, 255));
+	CPoint point(x1, y1);
+	dc.LPtoDP(&point);
+	point.x %= 8;
+	point.y %= 8;
+	brush.UnrealizeObject();
+	dc.SetBrushOrg(point);
 	dc.SelectObject(&brush);
 	dc.SetBkColor(RGB(192, 192, 192));
 	dc.Rectangle(x1, y1, x2, y2);
