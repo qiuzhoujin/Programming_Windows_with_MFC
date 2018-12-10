@@ -28,6 +28,13 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	
-	dc.TextOut(100, 100, TEXT("lame"));
+	CString string = TEXT("Now is the time");
+	RECT rect;
+	int x = 100;
+	int y = 20;
+	GetClientRect(&rect);
+	CSize size = dc.GetTextExtent(string);
+	dc.SetTextJustification(rect.right - 2 * x - size.cx, 3);
+
+	dc.TextOut(x, y, string);
 }
