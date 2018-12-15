@@ -27,14 +27,22 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::OnPaint()
 {
-	CPaintDC dc(this);
-	CString string = TEXT("Now is the time");
-	RECT rect;
-	int x = 100;
-	int y = 20;
+	CRect rect;
 	GetClientRect(&rect);
-	CSize size = dc.GetTextExtent(string);
-	dc.SetTextJustification(rect.right - 2 * x - size.cx, 3);
 
-	dc.TextOut(x, y, string);
+	CFont font;
+	font.CreatePointFont(720, TEXT("Lucida Console"));
+
+	CPaintDC dc(this);
+	dc.SelectObject(&font);
+	dc.SetBkMode(TRANSPARENT);
+
+	CString string = TEXT("Hello, MFC");
+	rect.OffsetRect(16, 16);
+	dc.SetTextColor(RGB(192, 192, 192));
+	dc.DrawText(string, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+
+	rect.OffsetRect(-16, -16);
+	dc.SetTextColor(RGB(0, 0, 0));
+	dc.DrawText(string, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 }
