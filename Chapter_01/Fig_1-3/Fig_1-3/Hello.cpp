@@ -35,7 +35,7 @@ void CMainWindow::OnPaint()
 	dc.SetViewportOrg(rect.Width() / 2, rect.Height() / 2);
 	dc.SetBkMode(TRANSPARENT);
 
-	for (int i = 0; i > -3600; i -= 150)
+	for (int i = 0; i < 3600; i += 150)
 	{
 		LOGFONT lf;
 		::ZeroMemory(&lf, sizeof(lf));
