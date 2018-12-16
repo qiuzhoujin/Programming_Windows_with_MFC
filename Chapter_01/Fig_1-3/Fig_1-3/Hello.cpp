@@ -30,19 +30,24 @@ void CMainWindow::OnPaint()
 	CRect rect;
 	GetClientRect(&rect);
 
-	CFont font;
-	font.CreatePointFont(720, TEXT("Lucida Console"));
-
 	CPaintDC dc(this);
-	dc.SelectObject(&font);
+	dc.SetViewportOrg(rect.Width() / 2, rect.Height() / 2);
 	dc.SetBkMode(TRANSPARENT);
 
-	CString string = TEXT("Hello, MFC");
-	rect.OffsetRect(16, 16);
-	dc.SetTextColor(RGB(192, 192, 192));
-	dc.DrawText(string, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+	for (int i = 0; i < 3600; i += 150)
+	{
+		LOGFONT lf;
+		::ZeroMemory(&lf, sizeof(lf));
+		lf.lfHeight = 160;
+		lf.lfWeight = FW_BOLD;
+		lf.lfEscapement = i;
+		lf.lfOrientation = i;
+		::lstrcpy(lf.lfFaceName, TEXT("Lucida Console"));
+		CFont font;
+		font.CreatePointFontIndirect(&lf);
 
-	rect.OffsetRect(-16, -16);
-	dc.SetTextColor(RGB(0, 0, 0));
-	dc.DrawText(string, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		CFont *pOldFont = dc.SelectObject(&font);
+		dc.TextOut(0, 0, CString(TEXT("     Hello, MFC")));
+		dc.SelectObject(pOldFont);
+	}
 }
