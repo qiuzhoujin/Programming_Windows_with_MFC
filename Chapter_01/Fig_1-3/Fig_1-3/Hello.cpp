@@ -27,29 +27,10 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::OnPaint()
 {
-	CRect rect;
-	GetClientRect(&rect);
-	CString str;
-
 	CPaintDC dc(this);
-	dc.SetViewportOrg(rect.Width() / 2, rect.Height() / 2);
-	dc.SetBkMode(TRANSPARENT);
-
-	for (int i = 0; i < 3600; i += 150)
-	{
-		LOGFONT lf;
-		::ZeroMemory(&lf, sizeof(lf));
-		lf.lfHeight = 160;
-		lf.lfWeight = FW_BOLD;
-		lf.lfEscapement = i;
-		lf.lfOrientation = i;
-		::lstrcpy(lf.lfFaceName, TEXT("Lucida Console"));
-		CFont font;
-		font.CreatePointFontIndirect(&lf);
-
-		CFont *pOldFont = dc.SelectObject(&font);
-		str.Format(TEXT("%s[%d]"), TEXT("     Hello, MFC"), i / 10);
-		dc.TextOut(0, 0, str);
-		dc.SelectObject(pOldFont);
-	}
+	CPen pen(PS_NULL, 0, (RGB(0, 0, 0)));
+	dc.SelectObject(&pen);
+	CBrush brush(RGB(192, 192, 192));
+	dc.SelectObject(&brush);
+	dc.Ellipse(0, 0, 100, 100);
 }
