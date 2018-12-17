@@ -28,9 +28,7 @@ CMainWindow::CMainWindow()
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	CPen pen(PS_NULL, 0, (RGB(0, 0, 0)));
-	dc.SelectObject(&pen);
-	CBrush brush(RGB(192, 192, 192));
-	dc.SelectObject(&brush);
+	dc.SelectStockObject(NULL_PEN);
+	dc.SelectStockObject(LTGRAY_BRUSH);
 	dc.Ellipse(0, 0, 100, 100);
 }
