@@ -22,19 +22,51 @@ END_MESSAGE_MAP()
 
 CMainWindow::CMainWindow()
 {
-	Create(NULL, TEXT("The Hello Application"));
+	Create(NULL, TEXT("Ruler"));
 }
 
 void CMainWindow::OnPaint()
 {
 	CPaintDC dc(this);
-	CPen pen;
-	pen.CreateStockObject(NULL_PEN);
-	dc.SelectObject(&pen);
+	int i;
 
-	CBrush brush;
-	brush.CreateStockObject(LTGRAY_BRUSH);
-	dc.SelectObject(&brush);
+	//
+	// Initialize the device context.
+	// 
+	dc.SetMapMode(MM_LOENGLISH);
+	dc.SetTextAlign(TA_CENTER | TA_BOTTOM);
+	dc.SetBkMode(TRANSPARENT);
 
-	dc.Ellipse(0, 0, 100, 100);
+	// 
+	// Draw the body of the ruler.
+	//
+	CBrush brush(RGB(255, 255, 0));
+	CBrush *pOldBrush = dc.SelectObject(&brush);
+	dc.Rectangle(100, -100, 1300, -200);
+	dc.SelectObject(pOldBrush);
+
+	//
+	// Draw the tick marks and labels.
+	//
+	for (i = 125; i < 1300; i += 25)
+	{
+		dc.MoveTo(i, -192);
+		dc.LineTo(i, -200);
+	}
+
+	for (i = 150; i < 1300; i += 50)
+	{
+		dc.MoveTo(i, -184);
+		dc.LineTo(i, -200);
+	}
+
+	for (i = 200; i < 1300; i+= 100)
+	{
+		dc.MoveTo(i, -175);
+		dc.LineTo(i, -200);
+
+		CString string;
+		string.Format(TEXT("%d"), (i / 100) - 1);
+		dc.TextOut(i, -175, string);
+	}
 }
